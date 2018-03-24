@@ -1,0 +1,36 @@
+.table-search {
+    line-height: 24px;
+}
+
+.search-input {
+    border: 1px solid #6FB3E0 !important;
+    width: 152px;
+    height: 28px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    line-height: 1.3;
+    color: #666 !important;
+    z-index: 11;
+    -webkit-transition: width ease .15s !important;
+    -o-transition: width ease .15s;
+    transition: width ease .15s
+}
+.date-input {
+    height: 28px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    font-size: 13px !important;
+    line-height: 1.3;
+    -webkit-transition: width ease .15s !important;
+    -o-transition: width ease .15s;
+    transition: width ease .15s
+}
+
+.search-icon {
+    color: #6FB3E0 !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    background-color: transparent
+}

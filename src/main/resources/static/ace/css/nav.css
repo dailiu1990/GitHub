@@ -1,0 +1,40 @@
+.no-skin .nav-list>li>div {
+    background-color: #F8F8F8;
+    color: #585858;
+}
+.nav-list>li>div {
+    display: block;
+    height: 39px;
+    line-height: 17px;
+    padding-left: 7px;
+    text-shadow: none!important;
+    font-size: 13px;
+}
+.nav-list>li>div {
+    margin: 0;
+}
+.nav>li>div {
+    padding: 10px 15px;
+}
+.nav-list>li div>.arrow {
+    display: block;
+    width: 14px!important;
+    height: 14px;
+    line-height: 14px;
+    text-shadow: none;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    padding: 0;
+    text-align: center;
+}
+.nav-list>li>div>.menu-icon {
+    display: inline-block;
+    min-width: 30px;
+    margin-right: 2px;
+    vertical-align: sub;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+}

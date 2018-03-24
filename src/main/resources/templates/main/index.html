@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Spring Boot With Ace Admin Template</title>
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="../ace/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../ace/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="../ace/css/fonts.googleapis.com.css"/>
+    <!-- ace styles -->
+    <link rel="stylesheet" href="../ace/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="../ace/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <![endif]-->
+    <link rel="stylesheet" href="../ace/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="../ace/css/ace-rtl.min.css"/>
+
+    <link rel="stylesheet" href="../ace/css/ace-ie.min.css"/>
+
+    <!-- <link href="../sidebar-menu/sidebar-menu.css" rel="stylesheet"/>-->
+    <link href="../toastr/toastr.min.css" rel="stylesheet"/>
+
+
+    <script src="../ace/js/jquery-1.11.3.min.js"></script>
+    <script src="../ace/js/bootstrap.min.js"></script>
+    <script src="../sidebar-menu/sidebar-menu.js"></script>
+    <script src="../ace/js/bootstrap-tab.js"></script>
+
+    <script src="../ace/js/html5shiv.min.js"></script>
+    <script src="../ace/js/respond.min.js"></script>
+    <script src="../ace/js/jquery-resize.js"></script>
+    <style type="text/css">
+        html,body {
+            font-size: 12px;
+            border: 0px;margin: 0px;outline: 0px;padding: 0px;
+            /*overflow-y: hidden;
+            overflow-x: hidden;*/
+        }
+        .tab-content {
+            padding-top: 3px;
+            padding-bottom: 0px;
+        }
+        .main-content {
+
+            margin-right: 0;
+            margin-top: 0;
+            min-height: 100%;
+            padding: 0;
+        }
+        .tab-pane{
+            margin-right: -8px;
+        }
+        .main-container{
+            background-color: #fff;
+        }
+
+    </style>
+
+    <style type="text/css">
+
+
+
+    </style>
+
+    <script>
+        jQuery(document).ready(function(){
+            $.each($(".submenu"),function(){
+                var $aobjs=$(this).children("li");
+                var rowCount=$aobjs.size();
+                var divHeigth=$(this).height();
+                $aobjs.height(divHeigth/rowCount);
+            });
+            //初始化宽度、高度
+            $("#main-container").height($(window).height()-52);
+            $(".main-content").height($(window).height()-90);
+           /* $(".tab-content").height($(window).height()-105);*/
+            $(".tab-content").height($(window).height()-73-$('#tablist').height());
+            $(".tab-pane.active").height($(window).height()-80-$('#tablist').height());
+            $(".sidebar").height($(window).height()-57);
+            var thisHeight = $(".nav-list").height($(window).outerHeight()-141);
+            $(".submenu").height();
+            $(".nav-list").children(".submenu").css("height",thisHeight);
+
+            $('#tablist').resize(function(){
+                $(".tab-content").height($(window).height()-70-$('#tablist').height());
+                $(".tab-pane.active").height($(window).height()-80-$('#tablist').height());
+            });
+
+            //当文档窗口发生改变时 触发
+            $(window).resize(function(){
+                $("#main-container").height($(window).height()-52);
+                $(".main-content").height($(window).height()-90);
+                $(".tab-content").height($(window).height()-70-$('#tablist').height());
+                $(".tab-pane.active").height($(window).height()-80-$('#tablist').height());
+                $(".sidebar").height($(window).height()-57);
+                var thisHeight = $(".nav-list").height($(window).outerHeight()-141);
+                $(".submenu").height();
+                $(".nav-list").children(".submenu").css("height",thisHeight);
+            });
+            /*$(".iframeurl").click(function(){
+             var cid = $(this).attr("name");
+             var cname = $(this).attr("title");
+             $("#iframe").attr("src",cid).ready();
+             $("#Bcrumbs").attr("href",cid).ready();
+             $(".Current_page a").attr('href',cid).ready();
+             $(".Current_page").attr('name',cid);
+             $(".Current_page").html(cname).css({"color":"#333333","cursor":"default"}).ready();
+             $("#parentIframe").html('<span class="parentIframe iframeurl"> </span>').css("display","none").ready();
+             $("#parentIfour").html(''). css("display","none").ready();
+             });*/
+
+
+        });
+    </script>
+
+</head>
+<body class="no-skin">
+<div id="navbar" class="navbar navbar-default          ace-save-state">
+    <div class="navbar-container ace-save-state" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="index.html" class="navbar-brand">
+                <small>
+                    <i class="fa fa-leaf"></i>
+                    Spring Boot With Ace Admin Template
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="grey dropdown-modal">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="ace-icon fa fa-tasks"></i>
+                        <span class="badge badge-grey">4</span>
+                    </a>
+
+                    <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="ace-icon fa fa-check"></i>
+                            4 Tasks to complete
+                        </li>
+
+                        <li class="dropdown-content">
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Software Update</span>
+                                            <span class="pull-right">65%</span>
+                                        </div>
+
+                                        <div class="progress progress-mini">
+                                            <div style="width:65%" class="progress-bar"></div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Hardware Upgrade</span>
+                                            <span class="pull-right">35%</span>
+                                        </div>
+
+                                        <div class="progress progress-mini">
+                                            <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Unit Testing</span>
+                                            <span class="pull-right">15%</span>
+                                        </div>
+
+                                        <div class="progress progress-mini">
+                                            <div style="width:15%" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Bug Fixes</span>
+                                            <span class="pull-right">90%</span>
+                                        </div>
+
+                                        <div class="progress progress-mini progress-striped active">
+                                            <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">
+                                See tasks with details
+                                <i class="ace-icon fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="purple dropdown-modal">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                        <span class="badge badge-important">8</span>
+                    </a>
+
+                    <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="ace-icon fa fa-exclamation-triangle"></i>
+                            8 Notifications
+                        </li>
+
+                        <li class="dropdown-content">
+                            <ul class="dropdown-menu dropdown-navbar navbar-pink">
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+														New Comments
+													</span>
+                                            <span class="pull-right badge badge-info">+12</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="btn btn-xs btn-primary fa fa-user"></i>
+                                        Bob just signed up as an editor ...
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+														New Orders
+													</span>
+                                            <span class="pull-right badge badge-success">+8</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+														Followers
+													</span>
+                                            <span class="pull-right badge badge-info">+11</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">
+                                See all notifications
+                                <i class="ace-icon fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="green dropdown-modal">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+                        <span class="badge badge-success">5</span>
+                    </a>
+
+                    <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="ace-icon fa fa-envelope-o"></i>
+                            5 Messages
+                        </li>
+
+                        <li class="dropdown-content">
+                            <ul class="dropdown-menu dropdown-navbar">
+                                <li>
+                                    <a href="#" class="clearfix">
+                                        <img src="../ace/images/avatars/avatar.png" class="msg-photo"
+                                             alt="Alex's Avatar"/>
+                                        <span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Alex:</span>
+														Ciao sociis natoque penatibus et auctor ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>a moment ago</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="clearfix">
+                                        <img src="../ace/images/avatars/avatar3.png" class="msg-photo"
+                                             alt="Susan's Avatar"/>
+                                        <span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Susan:</span>
+														Vestibulum id ligula porta felis euismod ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>20 minutes ago</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="clearfix">
+                                        <img src="../ace/images/avatars/avatar4.png" class="msg-photo"
+                                             alt="Bob's Avatar"/>
+                                        <span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Bob:</span>
+														Nullam quis risus eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>3:15 pm</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="clearfix">
+                                        <img src="../ace/images/avatars/avatar2.png" class="msg-photo"
+                                             alt="Kate's Avatar"/>
+                                        <span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Kate:</span>
+														Ciao sociis natoque eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>1:33 pm</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="clearfix">
+                                        <img src="../ace/images/avatars/avatar5.png" class="msg-photo"
+                                             alt="Fred's Avatar"/>
+                                        <span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Fred:</span>
+														Vestibulum id penatibus et auctor  ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>10:09 am</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="inbox.html">
+                                See all messages
+                                <i class="ace-icon fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="light-blue dropdown-modal">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="../ace/images/avatars/user.jpg" alt="Jason's Photo"/>
+                        <span class="user-info">
+									<small>Welcome,</small>
+									Jason
+								</span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-cog"></i>
+                                Settings
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="profile.html">
+                                <i class="ace-icon fa fa-user"></i>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.navbar-container -->
+</div>
+<div class="main-container ace-save-state" id="main-container">
+
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+    <div class="sidebar responsive ace-save-state" id="sidebar">
+        <script type="text/javascript">
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
+        </script>
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success">
+                    <i class="ace-icon fa fa-signal"></i>
+                </button>
+
+                <button class="btn btn-info">
+                    <i class="ace-icon fa fa-pencil"></i>
+                </button>
+
+                <button class="btn btn-warning">
+                    <i class="ace-icon fa fa-users"></i>
+                </button>
+
+                <button class="btn btn-danger">
+                    <i class="ace-icon fa fa-cogs"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div>
+
+
+        <ul class="nav nav-list" id="menu"></ul>
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12" style="padding-left:5px;">
+                    <ul class="nav nav-tabs" role="tablist" id="tablist">
+                        <li class="active"><a href="#Index" role="tab" data-toggle="tab">首页</a></li>
+                    </ul>
+                    <div class="tab-content" style="margin: 0">
+                        <div role="tabpanel" class="tab-pane active" id="Index" style="height:100%">
+                            <h2>欢迎进入后台管理系统</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#menu').sidebarMenu({
+            data: [{
+                id: '1',
+                text: '系统设置',
+                icon: 'menu-icon fa fa-desktop blue',
+                url: '',
+                menus: [
+                    {
+                        id: '11',
+                        text: '编码管理',
+                        icon: 'menu-icon fa fa-caret-right',
+                        url: '/CodeType/Index',
+                        menus: [
+                            {
+                                id: '50',
+                                text: '权限管理',
+                                icon: 'menu-icon fa fa-key orange',
+                                url: '/roles'
+                            },
+                            {
+                                id: '51',
+                                text: '菜单管理',
+                                icon: 'menu-icon fa fa-folder-open-o brown',
+                                url: '/SystemSetting/Menu'
+                            },
+                            {
+                                id: '51',
+                                text: '用户管理',
+                                icon: 'menu-icon fa fa-folder-open-o brown',
+                                url: '/SystemSetting/Menu'
+                            },
+                            {
+                                id: '52',
+                                text: '日志管理',
+                                icon: 'menu-icon fa fa-cog black',
+                                url: '/bootstrap-ace_sample/grid.html'
+                            }, {
+                                id: '53',
+                                text: '访问记录',
+                                icon: 'menu-icon fa fa-cog black',
+                                url: '/bootstrap-ace_sample/grid.html'
+                            }, {
+                                id: '54',
+                                text: 'IP黑名单',
+                                icon: 'menu-icon fa fa-cog black',
+                                url: '/blacklist'
+                            }
+                        ]
+                    }]
+            },
+                {
+                    id: '2',
+                    text: '基础数据',
+                    icon: 'menu-icon fa fa-hdd-o blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '21',
+                            text: '基础特征',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/BasicData/BasicFeature/Index'
+                        }, {
+                            id: '22',
+                            text: '特征管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/BasicData/Features/Index'
+                        }, {
+                            id: '23',
+                            text: '物料维护',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Model/Index'
+                        }, {
+                            id: '24',
+                            text: '站点管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Station/Index'
+                        }]
+                },
+                {
+                    id: '3',
+                    text: '权限管理',
+                    icon: 'menu-icon fa fa-users blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '31',
+                            text: '用户管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/SystemSetting/User'
+                        }, {
+                            id: '32',
+                            text: '角色管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/SystemSetting/Role'
+                        }, {
+                            id: '33',
+                            text: '菜单管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/SystemSetting/Menu'
+                        }, {
+                            id: '34',
+                            text: '部门管理',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/SystemSetting/Department'
+                        }]
+                },
+                {
+                    id: '4',
+                    text: '订单管理',
+                    icon: 'menu-icon fa fa-list blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '41',
+                            text: '订单查询',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/Query'
+                        }, {
+                            id: '42',
+                            text: '订单排产',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/PLANTPRODUCT'
+                        }, {
+                            id: '43',
+                            text: '订单撤排',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/cancelPRODUCT'
+                        }, {
+                            id: '44',
+                            text: '订单HOLD',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/hold'
+                        }, {
+                            id: '45',
+                            text: '订单删除',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/delete'
+                        }, {
+                            id: '47',
+                            text: '订单插单',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/insertorder'
+                        }, {
+                            id: '48',
+                            text: '订单导入',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/Order/Import'
+                        }]
+                },
+                {
+                    id: '5',
+                    text: 'UI And Elements',
+                    icon: 'menu-icon fa fa-desktop blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '51',
+                            text: 'typography',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/typography'
+                        }, {
+                            id: '52',
+                            text: 'elements',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/elements'
+                        }, {
+                            id: '53',
+                            text: 'buttons',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/buttons'
+                        }, {
+                            id: '54',
+                            text: 'content-slider',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/content-slider'
+                        }, {
+                            id: '55',
+                            text: 'treeview',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/treeview'
+                        }, {
+                            id: '56',
+                            text: 'jquery-ui',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/jquery-ui'
+                        },
+
+                        {
+                            id: '57',
+                            text: 'Layouts',
+                            icon: 'menu-icon fa fa-caret-right',
+                            url: '/CodeType/Index',
+                            menus: [
+                                {
+                                    id: '61',
+                                    text: 'top-menu',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/top-menu'
+                                }, {
+                                    id: '62',
+                                    text: 'two-menu-1',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/two-menu-1'
+                                }, {
+                                    id: '63',
+                                    text: 'two-menu-2',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/two-menu-2'
+                                }, {
+                                    id: '64',
+                                    text: 'mobile-menu-1',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/mobile-menu-1'
+                                }, {
+                                    id: '65',
+                                    text: 'mobile-menu-2',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/mobile-menu-2'
+                                }, {
+                                    id: '66',
+                                    text: 'mobile-menu-3',
+                                    icon: 'menu-icon fa fa-users orange',
+                                    url: '/mobile-menu-3'
+                                }
+
+                            ]
+                        }
+
+                    ]
+                },
+                {
+                    id: '6',
+                    text: 'widgets',
+                    icon: 'menu-icon fa fa-list-alt blue',
+                    url: '/widgets'
+                },
+                {
+                    id: '7',
+                    text: 'calendar',
+                    icon: 'menu-icon fa fa-calendar blue',
+                    url: '/calendar'
+
+                },
+                {
+                    id: '8',
+                    text: 'gallery',
+                    icon: 'menu-icon fa fa-picture-o blue',
+                    url: '/gallery'
+                },
+
+                {
+                    id: '9',
+                    text: 'More Pages',
+                    icon: 'menu-icon fa fa-tag blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '81',
+                            text: 'profile',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/profile'
+                        },
+                        {
+                            id: '82',
+                            text: 'inbox',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/inbox'
+                        },
+                        {
+                            id: '83',
+                            text: 'pricing',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/pricing'
+                        },
+                        {
+                            id: '84',
+                            text: 'invoice',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/invoice'
+                        },
+                        {
+                            id: '85',
+                            text: 'timeline',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/timeline'
+                        },
+                        {
+                            id: '86',
+                            text: 'search',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/search'
+                        },
+                        {
+                            id: '87',
+                            text: 'email',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/email'
+                        },
+                        {
+                            id: '88',
+                            text: 'login',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/login'
+                        }
+                    ]
+
+                },
+                {
+                    id: '10',
+                    text: 'Other Pages',
+                    icon: 'menu-icon fa fa-file-o blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '101',
+                            text: 'faq',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/faq'
+                        },
+                        {
+                            id: '102',
+                            text: 'error-500',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/error-500'
+                        },
+                        {
+                            id: '103',
+                            text: 'error-404',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/error-404'
+                        },
+                        {
+                            id: '104',
+                            text: 'grid',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/grid'
+                        },
+                        {
+                            id: '105',
+                            text: 'blank',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/blank'
+                        }
+                    ]
+
+                },
+                {
+                    id: '11',
+                    text: 'Other Pages',
+                    icon: 'menu-icon fa fa-desktop blue',
+                    url: '',
+                    menus: [
+                        {
+                            id: '111',
+                            text: 'Form Elements',
+                            icon: 'menu-icon fa fa-key orange',
+                            url: '/forms'
+                        }, {
+                            id: '112',
+                            text: 'Form Elements 2',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/forms2'
+                        }, {
+                            id: '57',
+                            text: 'wysiwyg and Markdown',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/wysiwyg'
+                        }, {
+                            id: '58',
+                            text: 'Dropzone',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/dropzone'
+                        }, {
+                            id: '56',
+                            text: 'Form-wizard',
+                            icon: 'menu-icon fa fa-users orange',
+                            url: '/forms-wizard'
+                        }
+                    ]
+                },
+                {
+                    id: '12',
+                    text: 'Tables',
+                    icon: 'menu-icon fa fa-list blue',
+                    url: '/tables',
+                    menus: [{
+                        id: '121',
+                        text: 'Simple And Dynamic',
+                        icon: 'menu-icon fa fa-users orange',
+                        url: '/SympleAndDynamic'
+                    }, {
+                        id: '122',
+                        text: 'jqGrid plugin',
+                        icon: 'menu-icon fa fa-users orange',
+                        url: '/jqgrid'
+                    }]
+                },
+                {
+                    id: '13',
+                    text: 'Dashboard',
+                    icon: 'menu-icon fa fa-tachometer blue',
+                    url: '/dashboard'
+                }
+            ]
+
+        });
+    });
+</script>
+<script src="../ace/js/ace-extra.min.js"></script>
+<script src="../ace/js/ace.min.js"></script>
+</body>
+</html>

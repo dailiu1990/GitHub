@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>Tables - Ace Admin</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <link rel="stylesheet" href="../ace/css/common.css"/>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="../ace/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../ace/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+    <!-- page specific plugin styles -->
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="../ace/css/fonts.googleapis.com.css"/>
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="../ace/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="../ace/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <![endif]-->
+    <link rel="stylesheet" href="../ace/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="../ace/css/ace-rtl.min.css"/>
+
+    <!--[if lte IE 9]>
+
+    <![endif]-->
+
+    <link rel="stylesheet" href="../ace/css/ace-ie.min.css"/>
+
+    <!-- 日期框 -->
+    <link rel="stylesheet" href="../ace/css/bootstrap-datepicker3.min.css" />
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+    <script src="../ace/js/ace-extra.min.js"></script>
+
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+    <!--[if lte IE 8]>
+    <script src="../ace/js/html5shiv.min.js"></script>
+    <script src="../ace/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="no-skin">
+
+
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+
+    <div class="main-content">
+        <div class="main-content-inner">
+
+
+            <div class="page-content ">
+                <div class="ace-settings-container" id="ace-settings-container">
+                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                    </div>
+
+                    <div class="ace-settings-box clearfix" id="ace-settings-box">
+                        <div class="pull-left width-50">
+                            <div class="ace-settings-item">
+                                <div class="pull-left">
+                                    <select id="skin-colorpicker" class="hide">
+                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
+                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                                    </select>
+                                </div>
+                                <span>&nbsp; Choose Skin</span>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                       id="ace-settings-navbar" autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                       id="ace-settings-sidebar" autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                       id="ace-settings-breadcrumbs" autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
+                                       autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
+                                       id="ace-settings-add-container" autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-add-container">
+                                    Inside
+                                    <b>.container</b>
+                                </label>
+                            </div>
+                        </div><!-- /.pull-left -->
+
+                        <div class="pull-left width-50">
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
+                                       autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
+                                       autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+                            </div>
+
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
+                                       autocomplete="off"/>
+                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+                            </div>
+                        </div><!-- /.pull-left -->
+                    </div><!-- /.ace-settings-box -->
+                </div><!-- /.ace-settings-container -->
+
+
+                <div class="content show">
+                        <!-- PAGE CONTENT BEGINS -->
+<div style="margin-top: 5px; " class="row" >
+    <div class="table-search pull-left">
+        <span class="input-icon">
+<input type="text" placeholder="在这里输入关键词" class="search-input" autocomplete="off" name="keywords"/>
+            <i class="ace-icon fa fa-search search-icon"></i>
+        </span>
+
+    </div>
+
+    <div style="vertical-align:top;padding-left:2px;" class="pull-left">
+        <input class="span10 date-picker date-input" name="lastStart" id="lastStart"  value="开始日期" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/>
+    </div>
+
+    <div style="vertical-align:top;padding-left:2px;" class="pull-left">
+        <input class="span10 date-picker date-input" name="lastEnd" id="lastEnd"  value="结束日期" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/>
+    </div>
+
+    <div style="vertical-align:top;padding-left:2px" class="pull-left">
+        <a class="btn btn-light btn-xs" th:title="检索">
+            <i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>
+        </a>
+    </div>
+
+<div style="vertical-align:top;padding-left:2px;" class="pull-left">
+    <a class="btn btn-light btn-xs" title="导出到EXCEL">
+<i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>
+    </a>
+
+</div>
+
+
+</div>
+   <div class="row" style="margin-top: 5px">
+       <table id="simple-table"  class="table  table-bordered table-hover">
+           <thead>
+           <tr>
+               <th class="center" style="width:35px">
+                   <label class="pos-rel">
+                       <input type="checkbox" class="ace"/>
+                       <span class="lbl"></span>
+                   </label>
+               </th>
+               <th class="detail-col center" style="width:50px">序号</th>
+               <th class="center">IP</th>
+               <th class="center">备注</th>
+               <th class="hidden-480 center">时间</th>
+
+               <th class="center">
+                   操作
+               </th>
+           </tr>
+           </thead>
+
+           <tbody>
+           <tr th:each="item:${blacklist}">
+               <td class="center">
+                   <label class="pos-rel">
+                       <input type="checkbox" class="ace"/>
+                       <span class="lbl"></span>
+                   </label>
+               </td>
+               <td>
+                   <a href="#" th:text="${item.id}">1</a>
+               </td>
+               <td>
+                   <a href="#" th:text="${item.ip}">无记录</a>
+               </td>
+               <td class="hidden-480">
+                   <span class="label label-sm label-warning" th:text="${item.remark}">无</span>
+               </td>
+               <td class="hidden-480">
+                                            <span class="label label-sm label-warning"
+                                                  th:time="${item.time}">20180905</span>
+               </td>
+           </tr>
+<tr th:if="${#lists.isEmpty(blacklist)}"  class="main_info">
+    <td colspan="100" class="center" >没有相关数据</td>
+</tr>
+           <tr>
+               <td class="center">
+                   <label class="pos-rel">
+                       <input type="checkbox" class="ace"/>
+                       <span class="lbl"></span>
+                   </label>
+               </td>
+
+               <td>
+                   <a href="#">1</a>
+               </td>
+
+               <td>
+                   <a href="#">192.168.1.201</a>
+               </td>
+
+
+               <td class="hidden-480">
+                   <span class="label label-sm label-warning">无</span>
+               </td>
+               <td class="hidden-480">
+                   <span class="label label-sm label-warning">20180905</span>
+               </td>
+               <td>
+                   <div class="hidden-sm hidden-xs btn-group">
+                       <!--<button class="btn btn-xs btn-success"  onclick="addmenu('${MENU_ID}');"  >
+                           <i class="ace-icon fa fa-check bigger-120"></i>
+                       </button>-->
+
+                       <button class="btn btn-xs btn-info"  onclick="editmenu('${MENU_ID}');" >
+                           <i class="ace-icon fa fa-pencil bigger-120"></i>
+                       </button>
+
+                       <button class="btn btn-xs btn-danger"  onclick="deletemenu('${MENU_ID}');" >
+                           <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                       </button>
+
+                       <!--  <button class="btn btn-xs btn-warning">
+                             <i class="ace-icon fa fa-flag bigger-120"></i>
+                         </button>-->
+                   </div>
+
+
+               </td>
+           </tr>
+
+
+           </tbody>
+       </table>
+   </div>
+                    <div class="row">
+                        <div class="pull-left">
+                            <a  class="btn btn-sm btn-success" onclick="addmenu('${MENU_ID}');">新增</a>
+                            <a class="btn btn-sm btn-danger" onclick="makeAll('确定要删除选中的数据吗?');"
+                               title="批量删除" >
+                                <i class='ace-icon fa fa-trash-o bigger-120'></i>
+                            </a>
+                        </div>
+<div class="pull-right">
+    <div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">	<ul class="pagination pull-right no-margin">
+        <li><a>共<font color="red">40</font>条</a></li>
+        <li><input type="number" value="" id="toGoPage" style="width:50px;text-align:center;float:left" placeholder="页码"/></li>
+        <li style="cursor:pointer;"><a onclick="toTZ();" class="btn btn-mini btn-success">跳转</a></li>
+        <li><a>首页</a></li>
+        <li><a>上页</a></li>
+        <li class="active"><a><font color="white">1</font></a></li>
+        <li style="cursor:pointer;"><a onclick="nextPage(2)">2</a></li>
+        <li style="cursor:pointer;"><a onclick="nextPage(3)">3</a></li>
+        <li style="cursor:pointer;"><a onclick="nextPage(4)">4</a></li>
+        <li style="cursor:pointer;"><a onclick="nextPage(2)">下页</a></li>
+        <li style="cursor:pointer;"><a onclick="nextPage(4)">尾页</a></li>
+        <li><a>共4页</a></li>
+        <li><select title="显示条数" style="width:55px;float:left;margin-top:1px;" onchange="changeCount(this.value)">
+            <option value="10">10</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="60">60</option>
+            <option value="70">70</option>
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="99">99</option>
+        </select>
+        </li>
+    </ul>
+        <script type="text/javascript">
+           //<![CDATA[
+            function nextPage(page){ top.jzts();	if(true && document.forms[0]){
+                var url = document.forms[0].getAttribute("action");
+                if(url.indexOf('?')>-1){url += "&currentPage=";}
+                else{url += "?currentPage=";}
+                url = url + page + "&showCount=10";
+                document.forms[0].action = url;
+                document.forms[0].submit();
+            }else{
+                var url = document.location+'';
+                if(url.indexOf('?')>-1){
+                    if(url.indexOf('currentPage')>-1){
+                        var reg = /currentPage=\d*/g;
+                        url = url.replace(reg,'currentPage=');
+                    }else{
+                        url += "&currentPage=";
+                    }
+                }else{url += "?currentPage=";}
+                url = url + page + "&showCount=10";
+                document.location = url;
+            }
+            }
+            function changeCount(value){ top.jzts();	if(true && document.forms[0]){
+                var url = document.forms[0].getAttribute("action");
+                if(url.indexOf('?')>-1){url += "&currentPage=";}
+                else{url += "?currentPage=";}
+                url = url + "1&showCount="+value;
+                document.forms[0].action = url;
+                document.forms[0].submit();
+            }else{
+                var url = document.location+'';
+                if(url.indexOf('?')>-1){
+                    if(url.indexOf('currentPage')>-1){
+                        var reg = /currentPage=\d*/g;
+                        url = url.replace(reg,'currentPage=');
+                    }else{
+                        url += "1&currentPage=";
+                    }
+                }else{url += "?currentPage=";}
+                url = url + "&showCount="+value;
+                document.location = url;
+            }
+            }
+            function toTZ(){var toPaggeVlue = document.getElementById("toGoPage").value;if(toPaggeVlue == ''){document.getElementById("toGoPage").value=1;return;}if(isNaN(Number(toPaggeVlue))){document.getElementById("toGoPage").value=1;return;}nextPage(toPaggeVlue);}
+       //]]>
+        </script>
+    </div>
+
+</div>
+                    </div>
+                        <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.row -->
+<div class="content hidden">
+
+</div>
+
+
+
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">Ace</span>
+							Application &copy; 2013-2014
+						</span>
+
+                &nbsp; &nbsp;
+                <span class="action-buttons">
+							<a href="#">
+								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+							</a>
+						</span>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+<script src="../ace/js/jquery-2.1.4.min.js"></script>
+
+
+<script src="../ace/js/bootstrap.min.js"></script>
+
+<script src="../ace/js/bootbox.js"/>
+
+
+<!-- page specific plugin scripts -->
+<script src="../ace/js/jquery.dataTables.min.js"></script>
+<script src="../ace/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="../ace/js/dataTables.buttons.min.js"></script>
+<script src="../ace/js/buttons.flash.min.js"></script>
+<script src="../ace/js/buttons.html5.min.js"></script>
+<script src="../ace/js/buttons.print.min.js"></script>
+<script src="../ace/js/buttons.colVis.min.js"></script>
+<script src="../ace/js/dataTables.select.min.js"></script>
+
+<!-- ace scripts -->
+<script src="../ace/js/ace-elements.min.js"></script>
+<script src="../ace/js/ace.min.js"></script>
+<!-- 日期框 -->
+<script src="../ace/js/bootstrap-datepicker.min.js"></script>
+<script src="../ace/js/bootstrap-datepicker.zh-CN.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    if ('ontouchstart' in document.documentElement) {
+        document.write("<script src='../ace/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    }
+    //]]>
+</script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(function ($) {
+        //initiate dataTables plugin
+
+
+        $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
+
+
+
+        $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+
+        var active_class = 'active';
+        $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function () {
+            var th_checked = this.checked;
+
+            $(this).closest('table').find('tbody > tr').each(function () {
+                var row = this;
+                if (th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+            });
+        });
+
+
+        $('#simple-table').on('click', 'td input[type=checkbox]', function () {
+            var $row = $(this).closest('tr');
+            if ($row.is('.detail-row ')) return;
+            if (this.checked) $row.addClass(active_class);
+            else $row.removeClass(active_class);
+        });
+
+        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+
+        function tooltip_placement(context, source) {
+            var $source = $(source);
+            var $parent = $source.closest('table');
+            var off1 = $parent.offset();
+            var w1 = $parent.width();
+            var off2 = $source.offset();
+            if (parseInt(off2.left) < (parseInt(off1.left) + parseInt(w1 / 2))) {
+                return 'right';
+            } else {
+                return 'left';
+            }
+        }
+
+
+        $('.show-details-btn').on('click', function (e) {
+            e.preventDefault();
+            $(this).closest('tr').next().toggleClass('open');
+            $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+        });
+
+
+
+    })
+    //新增菜单
+    function addmenu(MENU_ID){
+        $('.page-content').children(".show").removeClass("show").addClass("hidden");
+
+        $(".page-content").load("../html/blacklistadd.html .blackadd",function (result) {
+            //将被加载页的JavaScript加载到本页执行
+            $result = $(result);
+            $result.find("script").appendTo('#div');
+        });
+
+        //alert("success");
+        //  top.jzts();
+        //  window.location.href="<%=basePath%>menu/toAdd.do?MENU_ID="+MENU_ID;
+    };
+    function editmenu(MENU_ID) {
+        alert("EDITMENU");
+    }
+    function deletemenu(MENU_ID) {
+        alert("DELETEMENU");
+    }
+    function makeAll(msg){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) {
+                    //
+                }
+            });
+    }
+    //日期框
+    $('.date-picker').datepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    //]]>
+</script>
+</body>
+</html>
